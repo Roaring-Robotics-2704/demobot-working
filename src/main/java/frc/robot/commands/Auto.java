@@ -22,12 +22,13 @@ public class Auto extends CommandBase {
   public void initialize() {
     autoTime.reset();
     RobotContainer.m_imu.reset();
+    autoTime.reset();
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     autoTime.start();
-    while (autoTime.get() <= 1) {
+    while (autoTime.get() <= 2.4) {
       RobotContainer.m_Drivetrain.driveCartesian(-0.5, 0, 0,Rotation2d.fromRotations(RobotContainer.m_imu.getAngle()));
     }
   }
