@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -28,8 +29,8 @@ public class Drivetrain extends SubsystemBase {
 
 
 
-  public void driveCartesian(double y, double x, double z){
-    drive.driveCartesian(y,-x,z);
+  public void driveCartesian(double y, double x, double z, Rotation2d angle){
+    drive.driveCartesian(y,-x,z, angle);
   }
 
   @Override
