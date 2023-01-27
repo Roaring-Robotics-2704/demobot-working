@@ -29,8 +29,8 @@ public class Drivetrain extends SubsystemBase {
 
 
 
-  public void driveCartesian(double y, double x, double z, Rotation2d angle){
-    drive.driveCartesian(y,-x,z, angle);
+  public void driveCartesian(double y, double x, double z,Rotation2d angle){
+    drive.driveCartesian(-y,-x,-z, angle);
   }
 
   @Override

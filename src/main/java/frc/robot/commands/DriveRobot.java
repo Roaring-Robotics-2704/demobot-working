@@ -4,7 +4,7 @@
 
 package frc.robot.commands;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -19,8 +19,10 @@ public class DriveRobot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.m_imu.reset();
+    RobotContainer.m_imu.calibrate();
+    RobotContainer.m_imu.reset();
   }
-	public static final ADIS16470_IMU imu = new ADIS16470_IMU();
 
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,10 +35,9 @@ public class DriveRobot extends CommandBase {
     double outputx = joystickRightx*Constants.c_speedcap;
     double outputy = joystickRighty*Constants.c_speedcap;
     double outputz = joystickLeftx*Constants.c_speedcap;
-    double angle = imu.getAngle();
-    Rotation2d rotation = Rotation2d.fromRadians(angle);
-
-    RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,rotation);
+    double angle = RobotContainer.m_imu.getAngle();
+    Rotation2d heading = Rotation2d.fromDegrees(-angle);
+    RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,heading);
     
   }
 

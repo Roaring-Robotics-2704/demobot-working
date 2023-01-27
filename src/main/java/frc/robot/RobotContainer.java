@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,6 +24,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //Subsystems
   public static Drivetrain m_Drivetrain = new Drivetrain();
+  public static final ADIS16470_IMU m_imu = new ADIS16470_IMU();
 
 
   //Commands
