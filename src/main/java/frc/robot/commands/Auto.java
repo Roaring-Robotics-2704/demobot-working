@@ -28,7 +28,7 @@ public class Auto extends CommandBase {
   @Override
   public void execute() {
     autoTime.start();
-    while (autoTime.get() <= 1.6) {
+    while (autoTime.get() <= 1) {
       RobotContainer.m_Drivetrain.driveCartesian(-0.5, 0, 0,Rotation2d.fromRadians(imu.getAngle()));
     }
   }
