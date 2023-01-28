@@ -10,9 +10,9 @@ public class Auto extends CommandBase{
     addRequirements(RobotContainer.m_Drivetrain);
    } 
 private void moveAuto(double y,double x,double z) {
-    autoTime.start();
+    
     RobotContainer.m_Drivetrain.driveCartesian(y,x,z,0);
-    autoTime.reset();
+    
 }
 
 Timer autoTime = new Timer();
@@ -25,14 +25,19 @@ public void initialize(){
 
 @Override
 public void execute() {
+    autoTime.start();
     SmartDashboard.putNumber("autoTime",autoTime.get());
     if (mode){
         while (autoTime.get() <= 10.6){
             moveAuto(-0.5,0,0);
         }
+        autoTime.reset();
+        autoTime.start();
         while ( autoTime.get() <= 5.5){
             moveAuto(-0.5,0.5,0);
         }
+        autoTime.reset();
+        autoTime.start();
         while  ( autoTime.get() <= 4){
             moveAuto(-0.5,0,0);
         }
