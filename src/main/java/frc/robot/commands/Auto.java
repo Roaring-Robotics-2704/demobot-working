@@ -28,24 +28,25 @@ public void execute() {
     autoTime.start();
     SmartDashboard.putNumber("autoTime",autoTime.get());
     if (mode){
-        while (autoTime.get() <= 5.5){
-            moveAuto(-0.5,0,0);
+        while (autoTime.get() <= 1){//backwards
+            moveAuto(-0.25,0,0);
         }
-        autoTime.reset();
-        autoTime.start();
-        while ( autoTime.get() <= 5.5){
-            moveAuto(-0.5,0.5,0);
+        
+        while ( autoTime.get() <= 2){//right
+            moveAuto(0,0.25,0);
         }
-        autoTime.reset();
-        autoTime.start();
-        while  ( autoTime.get() <= 4){
-            moveAuto(-0.5,0,0);
+        
+        while  ( autoTime.get() <= 3){//forwards
+            moveAuto(0.25,0,0);
+        }
+        while  ( autoTime.get() <= 4){//left
+            moveAuto(0,-0.25,0);
         }
     }     
      
     else{
         if ( autoTime.get() <= 1.6){
-            moveAuto(-0.5,0,0);
+            moveAuto(-0.25,0,0);
             
         
         }
