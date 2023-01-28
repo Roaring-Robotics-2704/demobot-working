@@ -27,6 +27,8 @@ public void execute() {
     autoTime.start();
     SmartDashboard.putNumber("autoTime",autoTime.get());
             RobotContainer.m_Drivetrain.driveCartesian(-0.5, 0, 0, 0);
+            System.out.println(" stop being haunted");
+
     }     
   
 
