@@ -3,8 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -37,9 +35,7 @@ public class DriveRobot extends CommandBase {
     double outputy = joystickRighty*Constants.c_speedcap;
     double outputz = joystickLeftx*Constants.c_speedcap;
     double angle = RobotContainer.m_imu.getAngle();
-    Rotation2d heading = Rotation2d.fromDegrees(-angle);
-    RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,heading);
-    
+    RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz, -angle);
   }
 
   // Called once the command ends or is interrupted.

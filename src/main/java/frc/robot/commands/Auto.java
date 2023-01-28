@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
@@ -21,15 +20,13 @@ public class Auto extends CommandBase {
   @Override
   public void initialize() {
     autoTime.reset();
-    RobotContainer.m_imu.reset();
-    autoTime.reset();
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     autoTime.start();
     while (autoTime.get() <= 2.4) {
-      RobotContainer.m_Drivetrain.driveCartesian(-0.5, 0, 0,Rotation2d.fromRotations(RobotContainer.m_imu.getAngle()));
+      RobotContainer.m_Drivetrain.driveCartesian(-1, 0, 0,0);
     }
   }
 
