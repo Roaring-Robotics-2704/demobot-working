@@ -27,13 +27,13 @@ public void initialize(){
 public void execute() {
     SmartDashboard.putNumber("autoTime",autoTime.get());
     if (mode){
-        while (autoTime.get() <= 10.6){
+        while (autoTime.get() <= 5.5){
             moveAuto(-0.5,0,0);
         }
-        while ( autoTime.get() <= 5.5){
+        while ( autoTime.get() <= 2.0){
             moveAuto(-0.5,0.5,0);
         }
-        while  ( autoTime.get() <= 4){
+        while  ( autoTime.get() <= 3.0){
             moveAuto(-0.5,0,0);
         }
     }     
