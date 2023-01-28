@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto;
 import frc.robot.commands.DriveRobot;
@@ -31,6 +33,7 @@ public class RobotContainer {
   public static DriveRobot m_DriveRobot = new DriveRobot();
   public static Auto m_autonomous = new Auto();
 
+  SendableChooser<Boolean> autoChooser = new SendableChooser<>();
 
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
@@ -43,7 +46,9 @@ public class RobotContainer {
     configureButtonBindings();
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
- 
+    autoChooser.setDefaultOption("Normal", true);
+    autoChooser.addOption("Taxi Only", false);
+    SmartDashboard.putData("Autonomous Mode", autoChooser);
   }
 
   /**
@@ -60,6 +65,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    m_autonomous.mode = autoChooser.getSelected();
     return m_autonomous;
   }
 }

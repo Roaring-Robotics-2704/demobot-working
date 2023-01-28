@@ -1,42 +1,38 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Drivetrain;
 
-
-public class Auto extends CommandBase {
-  /** Creates a new Auto. */
-  public Auto() {
+public class Auto extends CommandBase{
+   public Auto() {
     addRequirements(RobotContainer.m_Drivetrain);
-  }
-  Timer autoTime = new Timer();
-  public Boolean mode = true;
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
+   } 
+
+
+Timer autoTime = new Timer();
+public Boolean mode = true;
+
+@Override
+public void initialize(){
+System.out.println(" stop being haunted");
     autoTime.reset();
-  }
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
+    autoTime.stop();
+}
+
+@Override
+public void execute() {
     autoTime.start();
-    while (autoTime.get() <= 2.4) {
-      RobotContainer.m_Drivetrain.driveCartesian(-1, 0, 0,0);
-    }
-  }
+    SmartDashboard.putNumber("autoTime",autoTime.get());
+            RobotContainer.m_Drivetrain.driveCartesian(-0.5, 0, 0, 0);
+    }     
+  
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
+@Override
+public boolean isFinished(){
     return false;
-  }
+}
 }
