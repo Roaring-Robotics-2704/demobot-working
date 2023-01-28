@@ -28,7 +28,7 @@ public void execute() {
     autoTime.start();
     SmartDashboard.putNumber("autoTime",autoTime.get());
     if (mode){
-        while (autoTime.get() <= 10.6){
+        while (autoTime.get() <= 5.5){
             moveAuto(-0.5,0,0);
         }
         autoTime.reset();
