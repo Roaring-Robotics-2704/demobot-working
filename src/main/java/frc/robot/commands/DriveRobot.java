@@ -20,22 +20,22 @@ public class DriveRobot extends CommandBase {
     RobotContainer.m_imu.reset();
     RobotContainer.m_imu.calibrate();
     RobotContainer.m_imu.reset();
-    
   }
-
+public boolean mode = true;
 
   // Called every time the scheduler runs while the command is scheduled.
   
   @Override
   public void execute() {
-    double joystickLeftx = RobotContainer.xbox.getLeftX();   //getRawAxis(Constants.c_leftJoystickAxisx);
-    double joystickRightx = RobotContainer.xbox.getRightX();  //getRawAxis(Constants.c_rightJoystickAxisx);
-    double joystickRighty = -RobotContainer.xbox.getRightY(); //getRawAxis(Constants.c_rightJoystickAxisy);
-    double outputx = joystickRightx*Constants.c_speedcap;
-    double outputy = joystickRighty*Constants.c_speedcap;
-    double outputz = joystickLeftx*Constants.c_speedcap;
+    double joystickz = RobotContainer.xbox.getLeftX();   //getRawAxis(Constants.c_leftJoystickAxisx);
+    double joystickx = RobotContainer.xbox.getRightX();  //getRawAxis(Constants.c_rightJoystickAxisx);
+    double joysticky = -RobotContainer.xbox.getRightY(); //getRawAxis(Constants.c_rightJoystickAxisy);
+    double outputx = joystickx*Constants.c_speedcap;
+    double outputy = joysticky*Constants.c_speedcap;
+    double outputz = joystickz*Constants.c_speedcap;
     double angle = RobotContainer.m_imu.getAngle();
-    RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz, -angle);
+
+    RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz, 0/*-angle*/);
   }
 
   // Called once the command ends or is interrupted.

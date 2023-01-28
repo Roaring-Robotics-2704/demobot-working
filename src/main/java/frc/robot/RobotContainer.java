@@ -33,8 +33,7 @@ public class RobotContainer {
   public static DriveRobot m_DriveRobot = new DriveRobot();
   public static Auto m_autonomous = new Auto();
 
-  SendableChooser<Boolean> autoChooser = new SendableChooser<>();
-
+  SendableChooser<Integer> autoChooser = new SendableChooser<>();
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
@@ -46,9 +45,12 @@ public class RobotContainer {
     configureButtonBindings();
     //Is nessary, might have been the reason for the error "DifferntialDrive...Output not updated often enough"
     m_Drivetrain.setDefaultCommand(m_DriveRobot);
-    autoChooser.setDefaultOption("Normal", true);
-    autoChooser.addOption("Taxi Only", false);
+    autoChooser.setDefaultOption("square", 1);
+    autoChooser.addOption("Back up", 2);
+    autoChooser.addOption("probably chaos",3);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
+
+    
   }
 
   /**
