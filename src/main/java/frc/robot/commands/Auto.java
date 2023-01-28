@@ -4,34 +4,48 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Drivetrain;
 
 public class Auto extends CommandBase{
    public Auto() {
     addRequirements(RobotContainer.m_Drivetrain);
    } 
-
+private void moveAuto(double y,double x,double z) {
+    autoTime.start();
+    RobotContainer.m_Drivetrain.driveCartesian(y,x,z,0);
+    autoTime.reset();
+}
 
 Timer autoTime = new Timer();
 public Boolean mode = true;
 
 @Override
 public void initialize(){
-System.out.println(" stop being haunted");
     autoTime.reset();
-    autoTime.stop();
 }
 
 @Override
 public void execute() {
-    autoTime.start();
     SmartDashboard.putNumber("autoTime",autoTime.get());
-            RobotContainer.m_Drivetrain.driveCartesian(-0.5, 0, 0, 0);
-            System.out.println(" stop being haunted");
-
+    if (mode){
+        while (autoTime.get() <= 10.6){
+            moveAuto(-0.5,0,0);
+        }
+        while ( autoTime.get() <= 5.5){
+            moveAuto(-0.5,0.5,0);
+        }
+        while  ( autoTime.get() <= 4){
+            moveAuto(-0.5,0,0);
+        }
     }     
-  
-
+     
+    else{
+        if ( autoTime.get() <= 1.6){
+            moveAuto(-0.5,0,0);
+            
+        
+        }
+    }
+}
 
 @Override
 public boolean isFinished(){
