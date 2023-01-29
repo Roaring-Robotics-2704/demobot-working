@@ -23,19 +23,31 @@ public class DriveRobot extends CommandBase {
   }
 public boolean mode;
 private double angle;
+public boolean turbo;
+public double turboamount;
   // Called every time the scheduler runs while the command is scheduled.
   
   @Override
   public void execute() {
+    turbo = RobotContainer.xbox.getRightBumper();
+    if (turbo) {
+      turboamount = 1;
+    }
+    else {
+      turboamount = Constants.c_speedcap;
+    }
     double joystickz = RobotContainer.xbox.getLeftX();   //getRawAxis(Constants.c_leftJoystickAxisx);
     double joystickx = RobotContainer.xbox.getRightX();  //getRawAxis(Constants.c_rightJoystickAxisx);
     double joysticky = -RobotContainer.xbox.getRightY(); //getRawAxis(Constants.c_rightJoystickAxisy);
-    double outputx = joystickx*Constants.c_speedcap;
-    double outputy = joysticky*Constants.c_speedcap;
-    double outputz = joystickz*Constants.c_speedcap;
+    double outputx = joystickx*turboamount;
+    double outputy = joysticky*turboamount;
+    double outputz = joystickz*turboamount;
     mode = RobotContainer.DriveMode.getSelected();
     if (mode) {
       angle = -RobotContainer.m_imu.getAngle();
+      if (RobotContainer.xbox.getLeftBumper()){
+        RobotContainer.m_imu.reset();
+      }
     }
     else {
       angle = 0;  
