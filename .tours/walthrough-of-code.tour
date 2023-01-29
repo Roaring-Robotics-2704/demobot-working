@@ -1,0 +1,147 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Walthrough of code",
+  "steps": [
+    {
+      "file": "src/main/java/frc/robot/Robot.java",
+      "description": "this is a definition  of a command, we define it so the roborio(the motherboard of the robot) can run it properly",
+      "line": 18
+    },
+    {
+      "file": "src/main/java/frc/robot/Robot.java",
+      "description": "we then activate our autonomous code here, this takes the get Autonomous command from Robotcontainer to set the autonomous command",
+      "line": 56
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "In the robot container, we define which file is our drivetrain so the robot can properly read it.",
+      "line": 28
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "our robot uses a gyro, so we define it here",
+      "line": 29
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "we then define the drivetrain code,",
+      "line": 33
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "and our autonomous code.",
+      "line": 34
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "here we define the chooser for our autonomous so we can tell the robot which autonomous script to run.",
+      "line": 36
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "we also add a chooser for if we use feild oriented control or not.",
+      "line": 37
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "we then define what we use to control the robot, this is usually an xbox controller or joystick.",
+      "line": 40
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "we then define that the drivetrain listens to the command to drive the robot",
+      "line": 49
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "we also set the options for autonomous,",
+      "line": 50
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "and send them to the computer, where the driver can choose on what to do.",
+      "line": 53
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "we then do the same thing for if we use field oriented control or not.",
+      "line": 55
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "here is where it reads the choice the user inputs, and then runs the proper code.",
+      "line": 75
+    },
+    {
+      "file": "src/main/java/frc/robot/subsystems/Drivetrain.java",
+      "description": "now in the subsytems, we define our motors, and the ports they are connected to, and what drive method we are using.",
+      "line": 15
+    },
+    {
+      "file": "src/main/java/frc/robot/subsystems/Drivetrain.java",
+      "description": "we then define the motors, and use a constant from the constants file to tell the robot what port it is on, so it can send the right instructions to the right port.",
+      "line": 18
+    },
+    {
+      "file": "src/main/java/frc/robot/Constants.java",
+      "description": "in the constants file, we define, well, the constants, such as motor ports.",
+      "line": 19
+    },
+    {
+      "file": "src/main/java/frc/robot/subsystems/Drivetrain.java",
+      "description": "we also define what the drive sytem is and what motors are in it. it goes in the order of back left, front right, back right, front left.",
+      "line": 27
+    },
+    {
+      "file": "src/main/java/frc/robot/subsystems/Drivetrain.java",
+      "description": "we then define the function that controls the motors.",
+      "line": 31
+    },
+    {
+      "file": "src/main/java/frc/robot/subsystems/Drivetrain.java",
+      "description": "This command converts the angle from the gyroscope into rotation2d, which the drivesystem can read.",
+      "line": 32
+    },
+    {
+      "file": "src/main/java/frc/robot/subsystems/Drivetrain.java",
+      "description": "we then set the command to drive the robot.",
+      "line": 33
+    },
+    {
+      "file": "src/main/java/frc/robot/commands/DriveRobot.java",
+      "description": "in the drive robot command, we first have to initialize everything.",
+      "line": 19
+    },
+    {
+      "file": "src/main/java/frc/robot/commands/DriveRobot.java",
+      "description": "we then read the data from the xbox.",
+      "line": 30
+    },
+    {
+      "file": "src/main/java/frc/robot/commands/DriveRobot.java",
+      "description": "and then we multiply it by a decimal to slow it down.",
+      "line": 33
+    },
+    {
+      "file": "src/main/java/frc/robot/commands/DriveRobot.java",
+      "description": "we then take the inputs from the xbox and commands the drivetrain to move",
+      "line": 43
+    },
+    {
+      "file": "src/main/java/frc/robot/commands/DriveRobot.java",
+      "description": "here, we check if they want field oriented control or not",
+      "line": 37
+    },
+    {
+      "file": "src/main/java/frc/robot/commands/Auto.java",
+      "description": "in the autonomous, we use a script we made to automatically drive the robot.",
+      "line": 42
+    },
+    {
+      "file": "src/main/java/frc/robot/RobotContainer.java",
+      "description": "and that's it, thanks for going through this tour.(made by Michael)",
+      "line": 25
+    }
+  ],
+  "ref": "main"
+}
