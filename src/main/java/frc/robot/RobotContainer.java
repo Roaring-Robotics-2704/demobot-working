@@ -34,6 +34,8 @@ public class RobotContainer {
   public static Auto m_autonomous = new Auto();
 
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
+  public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
+
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
   //getPOV can be used to find the ange value of the d-Pad on the xbox controller
@@ -50,7 +52,11 @@ public class RobotContainer {
     autoChooser.addOption("probably chaos",3);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
 
-    
+    DriveMode.setDefaultOption("Field Oriented", true);
+    DriveMode.addOption("Robot Oriented", false);
+    SmartDashboard.putData("Drive Mode", DriveMode);
+
+
   }
 
   /**
