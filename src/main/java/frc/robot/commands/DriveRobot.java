@@ -21,8 +21,8 @@ public class DriveRobot extends CommandBase {
     RobotContainer.m_imu.calibrate();
     RobotContainer.m_imu.reset();
   }
-public boolean mode = true;
-
+public boolean mode;
+private double angle;
   // Called every time the scheduler runs while the command is scheduled.
   
   @Override
@@ -33,9 +33,14 @@ public boolean mode = true;
     double outputx = joystickx*Constants.c_speedcap;
     double outputy = joysticky*Constants.c_speedcap;
     double outputz = joystickz*Constants.c_speedcap;
-    double angle = RobotContainer.m_imu.getAngle();
-
-    RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz, 0/*-angle*/);
+    mode = RobotContainer.DriveMode.getSelected();
+    if (mode) {
+      angle = -RobotContainer.m_imu.getAngle();
+    }
+    else {
+      angle = 0;  
+    }
+    RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,angle);
   }
 
   // Called once the command ends or is interrupted.
