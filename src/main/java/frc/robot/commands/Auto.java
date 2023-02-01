@@ -64,16 +64,16 @@ public void execute() {
     }
     else if (mode == 4) {//spinning square
         while (autoTime.get()<=1) {//back
-           moveAuto(-0.5,0,0.2);
+           moveAuto(-0.2,0,0.2);
         }
         while (autoTime.get()<=2) {//right
-            moveAuto(0,0.5,0.2);
+            moveAuto(0,0.2,0.2);
         }
         while (autoTime.get()<=3) {//up
-            moveAuto(0.5,0,0.2);
+            moveAuto(0.2,0,0.2);
         }
         while (autoTime.get()<=4) {//left
-            moveAuto(0,-0.5,0.2);
+            moveAuto(0,-0.2,0.2);
         }
     }
 }
