@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -24,18 +25,20 @@ public class DriveRobot extends CommandBase {
 
   public boolean mode;
   private double angle;
-  public boolean turbo;
+  public double turbo;
   public double turboamount;
   // Called every time the scheduler runs while the command is scheduled.
 
   @Override
   public void execute() {
-    turbo = RobotContainer.xbox.getRightBumper();
-    if (turbo) {
-      turboamount = 1;
+    turbo = RobotContainer.xbox.getRightTriggerAxis();
+    
+    if (turbo != 0) {
+      turboamount = turbo;
     } else {
       turboamount = Constants.c_speedcap;
     }
+    SmartDashboard.putNumber("turbo amount", turboamount);
     double joystickz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
     double joystickx = RobotContainer.xbox.getRightX(); // getRawAxis(Constants.c_rightJoystickAxisx);
     double joysticky = -RobotContainer.xbox.getRightY(); // getRawAxis(Constants.c_rightJoystickAxisy);
@@ -45,12 +48,20 @@ public class DriveRobot extends CommandBase {
     mode = RobotContainer.DriveMode.getSelected();
     if (mode) {
       angle = -RobotContainer.m_imu.getAngle();
-      if (RobotContainer.xbox.getLeftBumper()) {
-        RobotContainer.m_imu.reset();
-      }
+      
     } else {
       angle = 0;
     }
+    if (RobotContainer.xbox.getLeftBumper()) {
+      RobotContainer.m_imu.reset();
+    }
+    SmartDashboard.putNumber("x", outputx);
+    SmartDashboard.putNumber("y", outputy);
+    SmartDashboard.putNumber("z", outputz);
+    SmartDashboard.putNumber("output heading", angle);
+    SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());
+
+
     RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx, outputz, angle);
   }
 
