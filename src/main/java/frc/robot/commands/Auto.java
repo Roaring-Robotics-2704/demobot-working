@@ -24,7 +24,7 @@ public void initialize(){
     gyro.reset();
     
 }
-
+double outputz;
 @Override
 public void execute() {
     autoTime.start();
@@ -76,9 +76,6 @@ public void execute() {
         }
         while (autoTime.get()<=4) {//left
             moveAuto(0,-0.3,0.3);
-        }
-        while (Math.floor(gyro.getAngle()) != 0) {
-            moveAuto(0,0,Math.floor(gyro.getAngle())/360);
         }
     }
 }
