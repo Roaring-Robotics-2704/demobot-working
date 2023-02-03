@@ -43,7 +43,9 @@ public class DriveRobot extends CommandBase {
       turboamount = Constants.c_speedcap;
 
     }
+    
     SmartDashboard.putNumber("turbo amount", turboamount);
+    SmartDashboard.putNumber("turbo", turbo);
     double joystickz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
     double joystickx = RobotContainer.xbox.getRightX(); // getRawAxis(Constants.c_rightJoystickAxisx);
     double joysticky = -RobotContainer.xbox.getRightY(); // getRawAxis(Constants.c_rightJoystickAxisy);
@@ -64,9 +66,7 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("y", outputy);
     SmartDashboard.putNumber("z", outputz);
     SmartDashboard.putNumber("output heading", angle);
-    SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());
-
-
+    SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
     RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx, outputz, angle);
   }
 
