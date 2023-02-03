@@ -31,12 +31,17 @@ public class DriveRobot extends CommandBase {
 
   @Override
   public void execute() {
+    
     turbo = RobotContainer.xbox.getRightTriggerAxis();
     
     if (turbo != 0) {
-      turboamount = turbo;
-    } else {
+      turboamount = turbo+0.5;
+    } else if (turbo >= 1) {
+    turboamount = 1;
+    }
+    else {
       turboamount = Constants.c_speedcap;
+
     }
     SmartDashboard.putNumber("turbo amount", turboamount);
     double joystickz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
