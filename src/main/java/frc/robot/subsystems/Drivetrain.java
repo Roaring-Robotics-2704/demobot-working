@@ -26,8 +26,6 @@ public class Drivetrain extends SubsystemBase {
 
   private MecanumDrive drive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
 
-
-
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     drive.driveCartesian(y,x,z,heading);

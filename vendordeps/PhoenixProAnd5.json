@@ -80,7 +80,7 @@
         },
         {
             "groupId": "com.ctre.phoenixpro.sim",
-            "artifactId": "simTalonSRX",
+            "artifactId": "simWPI_TalonSRX",
             "version": "23.0.5",
             "isJar": false,
             "skipInvalidPlatforms": true,
@@ -306,9 +306,9 @@
         },
         {
             "groupId": "com.ctre.phoenixpro.sim",
-            "artifactId": "simTalonSRX",
+            "artifactId": "simWPI_TalonSRX",
             "version": "23.0.5",
-            "libName": "CTRE_SimTalonSRX",
+            "libName": "CTRE_SimWPI_TalonSRX",
             "headerClassifier": "headers",
             "sharedLibrary": true,
             "skipInvalidPlatforms": true,

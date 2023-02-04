@@ -51,6 +51,7 @@ public class RobotContainer {
     autoChooser.addOption("Back up", 2);
     autoChooser.addOption("probably chaos",3);
     autoChooser.addOption("chaos square",4);
+    autoChooser.addOption("self align",5);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
 
     DriveMode.setDefaultOption("Field Oriented", true);
