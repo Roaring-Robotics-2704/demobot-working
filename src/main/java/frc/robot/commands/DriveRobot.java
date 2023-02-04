@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -15,6 +17,18 @@ public class DriveRobot extends CommandBase {
     addRequirements(RobotContainer.m_Drivetrain);
   }
 
+  PIDController align = new PIDController(Constants.zpid.p,Constants.zpid.i,Constants.zpid.d);
+  ADIS16470_IMU gyro = RobotContainer.m_imu;
+  public static double vector(double x, double y) {
+      double angleRadians = Math.atan2(y, x);
+      double angleDegrees = Math.toDegrees(angleRadians);
+      return angleDegrees;
+  }
+  private void moveAuto(double x, double y,double z,double angle) {
+    RobotContainer.m_Drivetrain.driveCartesian(y,x,z,angle);
+
+  }
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -46,12 +60,13 @@ public class DriveRobot extends CommandBase {
     
     SmartDashboard.putNumber("turbo amount", turboamount);
     SmartDashboard.putNumber("turbo", turbo);
-    double joystickz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
+    double joystickxz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
+    double joystickyz = RobotContainer.xbox.getLeftY()
     double joystickx = RobotContainer.xbox.getRightX(); // getRawAxis(Constants.c_rightJoystickAxisx);
     double joysticky = -RobotContainer.xbox.getRightY(); // getRawAxis(Constants.c_rightJoystickAxisy);
     double outputx = joystickx * turboamount;
     double outputy = joysticky * turboamount;
-    double outputz = joystickz * turboamount;
+    double outputz = joystickxz * turboamount;
     mode = RobotContainer.DriveMode.getSelected();
     if (mode) {
       angle = -RobotContainer.m_imu.getAngle();
@@ -67,7 +82,12 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("z", outputz);
     SmartDashboard.putNumber("output heading", angle);
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
-    RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx, outputz, angle);
+    if (mode) {
+      moveAuto(0,0,align.calculate(gyro.getAngle(),vector(joystickxz,joystickxz)),angle);    
+    }
+    else {
+      moveAuto(outputx, outputy, outputz, angle);
+    }
   }
 
   // Called once the command ends or is interrupted.

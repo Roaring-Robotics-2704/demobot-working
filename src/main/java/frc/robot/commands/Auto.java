@@ -7,16 +7,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import CTRE_MagEncoder_Relative;
 
 public class Auto extends CommandBase{
    public Auto() {
     addRequirements(RobotContainer.m_Drivetrain);
    } 
    ADIS16470_IMU gyro = RobotContainer.m_imu;
-private void moveAuto(double y,double x,double z) {
-RobotContainer.m_Drivetrain.driveCartesian(y,x,z,-gyro.getAngle());   
-}
+   private void moveAuto(double y,double x,double z) {
+    RobotContainer.m_Drivetrain.driveCartesian(y,x,z,-gyro.getAngle());   
+    }
 Timer autoTime = new Timer();
 public int mode;
 
@@ -82,8 +81,16 @@ public void execute() {
             moveAuto(0,-0.3,0.3);
         }
         while (gyro.getAngle() != 0){
-            moveAuto(0,0,align.calculate(gyro.getAngle(),0));
+            moveAuto(0,0,align.calculate(gyro.getAngle(),0)/180);
             
+        }
+    }
+    else if (mode == 5) {
+        while (autoTime.get() <= 1.7) {
+            moveAuto(0,0,0.3);}
+        while (autoTime.get()>=1.7) 
+            while (gyro.getAngle() != 0) {
+            moveAuto(0,0,align.calculate(gyro.getAngle(),0));
         }
     }
 }
