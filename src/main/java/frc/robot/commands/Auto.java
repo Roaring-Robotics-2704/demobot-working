@@ -1,10 +1,13 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import CTRE_MagEncoder_Relative;
 
 public class Auto extends CommandBase{
    public Auto() {
@@ -25,6 +28,7 @@ public void initialize(){
     
 }
 double outputz;
+PIDController align = new PIDController(Constants.zpid.p,Constants.zpid.i,Constants.zpid.d);
 @Override
 public void execute() {
     autoTime.start();
@@ -76,6 +80,10 @@ public void execute() {
         }
         while (autoTime.get()<=4) {//left
             moveAuto(0,-0.3,0.3);
+        }
+        while (gyro.getAngle() != 0){
+            moveAuto(0,0,align.calculate(gyro.getAngle(),0));
+            
         }
     }
 }
