@@ -38,6 +38,7 @@ public class DriveRobot extends CommandBase {
   public boolean mode;
   private double angle;
   public double turbo;
+  public double precision;
   public double turboamount;
   double joystickxz; // getRawAxis(Constants.c_leftJoystickAxisx);
   double joystickyz;
@@ -48,16 +49,10 @@ public class DriveRobot extends CommandBase {
   public void execute() {
     
     turbo = RobotContainer.xbox.getRightTriggerAxis();
-    
-    if (turbo != 0) {
-      turboamount = turbo+0.5;
-    } else if (turbo >= 1) {
-    turboamount = 1;
-    }
-    else {
-      turboamount = Constants.c_speedcap;
+    precision = RobotContainer.xbox.getLeftTriggerAxis()/2;
+  
+      turboamount = turbo-precision+0.5;
 
-    }
     
     SmartDashboard.putNumber("turbo amount", turboamount);
     SmartDashboard.putNumber("turbo", turbo);
