@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -24,10 +25,7 @@ public class DriveRobot extends CommandBase {
       double angleDegrees = Math.toDegrees(angleRadians);
       return angleDegrees;
   }
-  private void moveAuto(double x, double y,double z,double angle) {
-    RobotContainer.m_Drivetrain.driveCartesian(y,x,z,angle);
 
-  }
   
   // Called when the command is initially scheduled.
   @Override
@@ -41,7 +39,10 @@ public class DriveRobot extends CommandBase {
   private double angle;
   public double turbo;
   public double turboamount;
-  // Called every time the scheduler runs while the command is scheduled.
+  double joystickxz; // getRawAxis(Constants.c_leftJoystickAxisx);
+  double joystickyz;
+  double joystickx; // getRawAxis(Constants.c_rightJoystickAxisx);
+  double joysticky;
 
   @Override
   public void execute() {
@@ -60,36 +61,43 @@ public class DriveRobot extends CommandBase {
     
     SmartDashboard.putNumber("turbo amount", turboamount);
     SmartDashboard.putNumber("turbo", turbo);
-    double joystickxz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
-    double joystickyz = RobotContainer.xbox.getLeftY()
-    double joystickx = RobotContainer.xbox.getRightX(); // getRawAxis(Constants.c_rightJoystickAxisx);
-    double joysticky = -RobotContainer.xbox.getRightY(); // getRawAxis(Constants.c_rightJoystickAxisy);
+    if (RobotContainer.Drivescheme.getSelected()) {
+       joystickxz = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_leftJoystickAxisx);
+       joystickyz = RobotContainer.xbox.getLeftY();
+       joystickx = RobotContainer.xbox.getRightX(); // getRawAxis(Constants.c_rightJoystickAxisx);
+       joysticky = -RobotContainer.xbox.getRightY();
+    }
+    else {
+     joystickxz = RobotContainer.xbox.getRightX(); // getRawAxis(Constants.c_leftJoystickAxisx);
+     joystickyz = RobotContainer.xbox.getRightY();
+     joystickx = RobotContainer.xbox.getLeftX(); // getRawAxis(Constants.c_rightJoystickAxisx);
+     joysticky = -RobotContainer.xbox.getLeftY(); // getRawAxis(Constants.c_rightJoystickAxisy);
+    }
     double outputx = joystickx * turboamount;
     double outputy = joysticky * turboamount;
     double outputz = joystickxz * turboamount;
     mode = RobotContainer.DriveMode.getSelected();
-    if (mode) {
-      angle = -RobotContainer.m_imu.getAngle();
-      
-    } else {
-      angle = 0;
-    }
-    if (RobotContainer.xbox.getLeftBumper()) {
-      RobotContainer.m_imu.reset();
-    }
+    
     SmartDashboard.putNumber("x", outputx);
     SmartDashboard.putNumber("y", outputy);
     SmartDashboard.putNumber("z", outputz);
+    SmartDashboard.putNumber("vector angle",vector(joystickxz,joystickyz));
     SmartDashboard.putNumber("output heading", angle);
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
     if (mode) {
-      moveAuto(0,0,align.calculate(gyro.getAngle(),vector(joystickxz,joystickxz)),angle);    
+      RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,-gyro.getAngle());   
     }
     else {
-      moveAuto(outputx, outputy, outputz, angle);
+      RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
+    }
+    if (RobotContainer.xbox.getLeftBumper()) {
+      RobotContainer.m_imu.reset();
+      RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0.5);
+    }
+    else {
+      RobotContainer.xbox.setRumble(RumbleType.kBothRumble, 0);
     }
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {

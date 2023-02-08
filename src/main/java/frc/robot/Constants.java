@@ -26,7 +26,7 @@ public final class Constants {
     public static int c_rightJoystickAxisy = 5;
     public final static class zpid {
         public static double p = 0.005;
-        public static double i = 0.0025;
+        public static double i = 0;
         public static double d = 0;
     }
     

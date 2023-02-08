@@ -35,6 +35,8 @@ public class RobotContainer {
 
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   public static SendableChooser<Boolean> DriveMode = new SendableChooser<>();
+  public static SendableChooser<Boolean> Drivescheme = new SendableChooser<>();
+
 
   //OI
   public static XboxController xbox = new XboxController(Constants.c_joystick);
@@ -52,8 +54,10 @@ public class RobotContainer {
     autoChooser.addOption("probably chaos",3);
     autoChooser.addOption("chaos square",4);
     autoChooser.addOption("self align",5);
+    Drivescheme.setDefaultOption("Katelyn", true);
+    Drivescheme.addOption("Matthew", false);
     SmartDashboard.putData("Autonomous Mode", autoChooser);
-
+    SmartDashboard.putData("driver", Drivescheme);
     DriveMode.setDefaultOption("Field Oriented", true);
     DriveMode.addOption("Robot Oriented", false);
     SmartDashboard.putData("Drive Mode", DriveMode);
