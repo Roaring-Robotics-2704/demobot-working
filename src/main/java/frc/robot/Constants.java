@@ -29,6 +29,6 @@ public final class Constants {
         public static double i = 0;
         public static double d = 0;
     }
-    
+    public static int setup = 10;
     public static double c_speedcap = 0.5;//0.75 speed is good. y of xbox times this number.
 }
