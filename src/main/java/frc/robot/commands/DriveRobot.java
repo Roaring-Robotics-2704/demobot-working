@@ -35,7 +35,7 @@ public class DriveRobot extends CommandBase {
     RobotContainer.m_imu.reset();
   }
 
-  public boolean mode;
+  public int mode;
   private double angle;
   public double turbo;
   public double precision;
@@ -79,11 +79,14 @@ public class DriveRobot extends CommandBase {
     SmartDashboard.putNumber("vector angle",vector(joystickxz,joystickyz));
     SmartDashboard.putNumber("output heading", angle);
     SmartDashboard.putNumber("actual heading", -RobotContainer.m_imu.getAngle());;
-    if (mode) {
+    if (mode == 1) {
       RobotContainer.m_Drivetrain.driveCartesian(outputy,outputx,outputz,-gyro.getAngle());   
     }
-    else {
+    else if (mode == 2) {
       RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
+    }
+    else {
+      RobotContainer.m_Drivetrain.tank(outputz, outputy);
     }
     if (RobotContainer.xbox.getLeftBumper()) {
       RobotContainer.m_imu.reset();
