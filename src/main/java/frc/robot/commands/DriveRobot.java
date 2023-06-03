@@ -86,7 +86,6 @@ public class DriveRobot extends CommandBase {
       RobotContainer.m_Drivetrain.driveCartesian(outputy, outputx,outputz, 0);
     }
     else {
-      RobotContainer.m_Drivetrain.tank(outputz, outputy);
     }
     if (RobotContainer.xbox.getLeftBumper()) {
       RobotContainer.m_imu.reset();

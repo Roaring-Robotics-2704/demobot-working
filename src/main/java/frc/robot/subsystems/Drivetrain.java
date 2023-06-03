@@ -23,16 +23,11 @@ public class Drivetrain extends SubsystemBase {
   MotorControllerGroup m_right = new MotorControllerGroup(m_frontrightMotor, m_backrightMotor);
   MotorControllerGroup m_left = new MotorControllerGroup(m_frontleftMotor, m_backleftMotor);
   private MecanumDrive mecanumdrive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
-  private DifferentialDrive tankdrive = new DifferentialDrive(m_left, m_right);
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(-y,-x,-z,heading);
   }
-  public void tank(double x,double y){
-    double left = (-y-x)*2;
-    double right = (-y+x)*2;
-    tankdrive.tankDrive(left,right);
-  }
+
 
   @Override
   public void periodic() {
