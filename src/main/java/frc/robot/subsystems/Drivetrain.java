@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import org.littletonrobotics.junction.Logger;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -25,12 +26,16 @@ public class Drivetrain extends SubsystemBase {
   private MecanumDrive mecanumdrive = new MecanumDrive(m_frontleftMotor, m_backleftMotor, m_frontrightMotor, m_backrightMotor);
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
-    mecanumdrive.driveCartesian(-y,-x,-z,heading);
+    mecanumdrive.driveCartesian(-y,-x,z,heading);
+    Logger.getInstance().recordOutput("y", -y);
+    Logger.getInstance().recordOutput("x", -x);
+    Logger.getInstance().recordOutput("x", z);
   }
 
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  
   }
 }
