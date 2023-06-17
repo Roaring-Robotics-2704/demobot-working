@@ -3,12 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.*;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import org.littletonrobotics.junction.Logger;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,9 +24,6 @@ public class Drivetrain extends SubsystemBase {
   public void driveCartesian(double y, double x, double z,double rotation){
     Rotation2d heading = Rotation2d.fromDegrees(rotation);
     mecanumdrive.driveCartesian(-y,-x,z,heading);
-    Logger.getInstance().recordOutput("y", -y);
-    Logger.getInstance().recordOutput("x", -x);
-    Logger.getInstance().recordOutput("x", z);
   }
 
 
